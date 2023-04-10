@@ -1,0 +1,4 @@
+# Binaries and Compilation Objects
+bin/*
+build/*
+tp2

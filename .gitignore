@@ -2,3 +2,6 @@
 bin/*
 build/*
 tp2
+
+# Tests folder
+tests/*

@@ -1,7 +1,7 @@
 # Binaries and Compilation Objects
-bin/*
-build/*
+bin
+build
 tp2
 
 # Tests folder
-tests/*
+tests

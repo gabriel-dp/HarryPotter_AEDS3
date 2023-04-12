@@ -34,5 +34,8 @@ int main(int argc, char* argv[]) {
         startCPU = endCPU;
     }
 
+    // Deallocates inputBoards
+    freeBoardsArray(&inputBoards);
+
     return 0;
 }

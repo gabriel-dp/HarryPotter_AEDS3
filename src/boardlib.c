@@ -36,3 +36,17 @@ void printBoard(Board* board) {
         printf("\n");
     }
 }
+
+// Deallocates entire BoardsArray structure
+void freeBoardsArray(BoardsArray* array) {
+    for (int b = 0; b < array->length; b++) {
+        for (int r = 0; r < array->boards[b].rows; r++) {
+            // Deallocates Board columns
+            free(array->boards[b].matrix[r]);
+        }
+        // Deallocates Board rows
+        free(array->boards[b].matrix);
+    }
+    // Deallocates BoardsArray
+    free(array->boards);
+}

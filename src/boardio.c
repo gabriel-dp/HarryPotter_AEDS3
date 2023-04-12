@@ -14,7 +14,7 @@ BoardsArray getBoardsFromInput(char* inputPath) {
     // Try to open the inputFile in read mode
     FILE* inputFile = fopen(inputPath, "r");
     if (inputFile == NULL) {
-        throwFileError("Cannot read input file");
+        throwFileError("Cannot open input file");
     }
 
     // Reads the number of boards
@@ -54,4 +54,20 @@ BoardsArray getBoardsFromInput(char* inputPath) {
     fclose(inputFile);
 
     return newBoards;
+}
+
+void saveResultsOnOutput(char* outputPath, Energy* results, int resultsLength) {
+    // Try to open the outputFile in write mode
+    FILE* outputFile = fopen(outputPath, "w");
+    if (outputFile == NULL) {
+        throwFileError("Cannot open output file");
+    }
+
+    // Writes one result per line
+    for (int i = 0; i < resultsLength; i++) {
+        fprintf(outputFile, "%d\n", results[i]);
+    }
+
+    // Closes outputFile
+    fclose(outputFile);
 }

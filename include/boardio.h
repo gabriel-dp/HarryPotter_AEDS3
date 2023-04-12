@@ -5,5 +5,6 @@
 
 void throwFileError(char*);
 BoardsArray getBoardsFromInput(char*);
+void saveResultsOnOutput(char*, Energy*, int);
 
 #endif

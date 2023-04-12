@@ -16,7 +16,7 @@ SRCDIR := src
 CFLAGS := -Wall -I $(INCDIR)
 
 # Linker flags
-LDFLAGS := -lm
+LDFLAGS := 
 
 # %.o file names
 NAMES := $(notdir $(basename $(wildcard $(SRCDIR)/*.c)))

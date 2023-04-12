@@ -1,8 +1,10 @@
 #ifndef BOARDLIB_H
 #define BOARDLIB_H
 
+typedef int Energy;
+
 typedef struct {
-    int energy;
+    Energy energy;
 } Square;
 
 typedef struct {

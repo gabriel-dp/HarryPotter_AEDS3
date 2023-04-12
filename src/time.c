@@ -25,7 +25,7 @@ Time getCpuTime() {
 }
 
 // Prints the difference between start to end
-void printElapsedTime(Time startTime, Time endTime) {
+void printElapsedTime(char* message, Time startTime, Time endTime) {
     Time elapsedTime = endTime - startTime;
-    printf("Elapsed time: %Lf\n", elapsedTime);
+    printf("%s = %Lf\n", message, elapsedTime);
 }

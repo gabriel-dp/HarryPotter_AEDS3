@@ -21,7 +21,8 @@ int main(int argc, char* argv[]) {
 
     // Run strategy1 to find result of all boards
     for (int i = 0; i < inputBoards.length; i++) {
-        printf("\nBoard %d - |%d|\n", i + 1, strategy1(&inputBoards.boards[i]));
+        Energy result = strategy == 1 ? strategy1(&inputBoards.boards[i]) : strategy2(&inputBoards.boards[i]);
+        printf("\nBoard %d - |%d|\n", i + 1, result);
 
         // Ends time monitoring
         Time endReal = getRealTime();

@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
         Time endReal = getRealTime();
         Time endCPU = getCpuTime();
         printElapsedTime("Real Time", startReal, endReal);
-        printElapsedTime("CPU Time", startCPU, endCPU);
+        printElapsedTime("CPU Time ", startCPU, endCPU);
         printf("\n");
 
         // Resets timer

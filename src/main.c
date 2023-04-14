@@ -28,7 +28,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < inputBoards.length; i++) {
         // Stores the result based on selected strategy
         results[i] = strategy == 1 ? strategy1(&inputBoards.boards[i]) : strategy2(&inputBoards.boards[i]);
-        printf("Board %d (%d)\n", i + 1, results[i]);
+        printf("Board %d (%dx%d)\n", i + 1, inputBoards.boards[i].rows, inputBoards.boards[i].columns);
+        printf("Minimum Life = %d\n", results[i]);
 
         // Ends time monitoring
         Time endReal = getRealTime();

@@ -19,5 +19,6 @@ void inOrderTraversal(Energy, Energy, int, int, Board*, Energy*);
 
 Energy strategy2(Board*);
 void fillDataDynamically(Board*, DataSquare**);
+void printPath(Board*, DataSquare**);
 
 #endif

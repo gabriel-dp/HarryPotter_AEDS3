@@ -15,7 +15,7 @@ typedef struct {
 } DataSquare;
 
 Energy strategy1(Board*);
-void inOrderTraversal(Energy, Energy, int, int, Board*, Energy*);
+void depthFirstSearch(Energy, Energy, int, int, Board*, Energy*);
 
 Energy strategy2(Board*);
 void fillDataDynamically(Board*, DataSquare**);

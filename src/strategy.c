@@ -3,15 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Searches for the globalMin Energy in the board using Inorder Traversal
+// Searches for the globalMin Energy in the board using Depth-First Search
 int strategy1(Board* board) {
     Energy globalMin = 0;
-    inOrderTraversal(1, 1, 0, 0, board, &globalMin);
+    depthFirstSearch(1, 1, 0, 0, board, &globalMin);
     return globalMin;
 }
 
 // Browses all paths of the matrix going only right and down, searching for the lowest globalMin
-void inOrderTraversal(Energy actual, Energy min, int r, int c, Board* board, Energy* globalMin) {
+void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Energy* globalMin) {
     // Sum squareEnergy to actual Energy
     Energy squareEnergy = board->matrix[r][c].energy;
     actual += squareEnergy;
@@ -31,11 +31,11 @@ void inOrderTraversal(Energy actual, Energy min, int r, int c, Board* board, Ene
     } else {
         if (r + 1 < board->rows) {
             // Continue path in the bottom square if it exists
-            inOrderTraversal(actual, min, r + 1, c, board, globalMin);
+            depthFirstSearch(actual, min, r + 1, c, board, globalMin);
         }
         if (c + 1 < board->columns) {
             // Continue path in the right square if it exists
-            inOrderTraversal(actual, min, r, c + 1, board, globalMin);
+            depthFirstSearch(actual, min, r, c + 1, board, globalMin);
         }
     }
 }

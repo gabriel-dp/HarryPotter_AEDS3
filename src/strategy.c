@@ -65,14 +65,9 @@ int strategy2(Board* board) {
 
 // Fills each DataSquare in the matrix until the last position
 void fillDataDynamically(Board* board, DataSquare** data) {
-    // Browses the matrix by diagonals
-    for (int k = 0; k < (board->rows + board->columns - 1); k++) {
-        for (int r = 0; r <= k; r++) {
-            int c = k - r;
-
-            // Avoid invalid positions
-            if (r >= board->rows || c >= board->columns) continue;
-
+    // Browses all squares
+    for (int r = 0; r < board->rows; r++) {
+        for (int c = 0; c < board->columns; c++) {
             // Get actual and previous squares
             DataSquare* dataSquare = &(data[r][c]);
             Square* square = &(board->matrix[r][c]);

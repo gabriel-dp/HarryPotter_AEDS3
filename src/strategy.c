@@ -52,7 +52,7 @@ int strategy2(Board* board) {
     fillDataDynamically(board, data);
     int result = data[board->rows - 1][board->columns - 1].min;
 
-    printPath(board, data);
+    // printPath(board, data);
 
     // Deallocates DataSquare matrix
     for (int r = 0; r < board->rows; r++) {
@@ -105,12 +105,14 @@ void fillDataDynamically(Board* board, DataSquare** data) {
 
 void printPath(Board* board, DataSquare** data) {
     int r = board->rows - 1, c = board->columns - 1;
-    while (data[r][c].origin != SQUARE_START) {
-        printf("(r=%d, c=%d) - %d\n", r + 1, c + 1, data[r][c].origin);
+
+    while (1) {
+        printf("(r=%d, c=%d)\n", r + 1, c + 1);
         if (data[r][c].origin == SQUARE_TOP)
             r--;
-        else
+        else if (data[r][c].origin == SQUARE_LEFT)
             c--;
+        else
+            break;
     }
-    printf("(r=1, c=1)\n");
 }

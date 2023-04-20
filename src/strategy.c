@@ -52,7 +52,7 @@ int strategy2(Board* board) {
     fillDataDynamically(board, data);
     int result = data[board->rows - 1][board->columns - 1].min;
 
-    // printPath(board, data);
+    printPath(board, data);
 
     // Deallocates DataSquare matrix
     for (int r = 0; r < board->rows; r++) {
@@ -81,7 +81,7 @@ void fillDataDynamically(Board* board, DataSquare** data) {
                 dataSquare->min = 1;
             } else {
                 // Defines bestOrigin as SQUARE_TOP or SQUARE_LEFT
-                int bestOrigin = squareTop && (data[r - 1][c].min < data[r][c - 1].min) ? SQUARE_TOP : SQUARE_LEFT;
+                int bestOrigin = squareTop && (!squareLeft || (data[r - 1][c].min < data[r][c - 1].min)) ? SQUARE_TOP : SQUARE_LEFT;
                 dataSquare->origin = bestOrigin;
 
                 // Sums actual Energy to the best previous Energy
@@ -106,7 +106,7 @@ void fillDataDynamically(Board* board, DataSquare** data) {
 void printPath(Board* board, DataSquare** data) {
     int r = board->rows - 1, c = board->columns - 1;
     while (data[r][c].origin != SQUARE_START) {
-        printf("(r=%d, c=%d)\n", r + 1, c + 1);
+        printf("(r=%d, c=%d) - %d\n", r + 1, c + 1, data[r][c].origin);
         if (data[r][c].origin == SQUARE_TOP)
             r--;
         else

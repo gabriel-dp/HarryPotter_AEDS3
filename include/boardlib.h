@@ -20,6 +20,7 @@ typedef struct {
 Board createBoard(int, int);
 BoardsArray createBoardsArray(int);
 void printBoard(Board*);
+void freeBoard(Board*);
 void freeBoardsArray(BoardsArray*);
 
 #endif

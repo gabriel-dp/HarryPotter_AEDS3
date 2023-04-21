@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // Searches for the globalMin Energy in the board using Depth-First Search
-int strategy1(Board* board) {
+Energy strategy1(Board* board) {
     Energy globalMin = 0;
     depthFirstSearch(1, 1, 0, 0, board, &globalMin);
     return globalMin;
@@ -40,79 +40,80 @@ void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Ene
     }
 }
 
-// Searches for the globalMin Energy in the board using Dynamic Programming
-int strategy2(Board* board) {
-    // Dynamically allocates the matrix of DataSquares
-    DataSquare** data = (DataSquare**)malloc(board->rows * sizeof(DataSquare*));
-    for (int r = 0; r < board->rows; r++) {
-        data[r] = (DataSquare*)malloc(board->columns * sizeof(DataSquare));
-    }
+// Searches for the minimum Energy in the board using Dynamic Programming
+Energy strategy2(Board* board) {
+    // Creates a new Board to store minimum energy of each square
+    Board data = createBoard(board->rows, board->columns);
 
-    // Fills DataSquare matrix and get the result from the last position
-    fillDataDynamically(board, data);
-    int result = data[board->rows - 1][board->columns - 1].min;
+    // Fills minimum Energy matrix and get the result from the first Square
+    fillDataDynamically(board, &data);
+    Energy result = data.matrix[0][0].energy;
 
-    // printPath(board, data);
+    // printPath(&data);
 
-    // Deallocates DataSquare matrix
-    for (int r = 0; r < board->rows; r++) {
-        free(data[r]);
-    }
-    free(data);
+    freeBoard(&data);
 
     return result;
 }
 
-// Fills each DataSquare in the matrix until the last position
-void fillDataDynamically(Board* board, DataSquare** data) {
-    // Browses all squares
-    for (int r = 0; r < board->rows; r++) {
-        for (int c = 0; c < board->columns; c++) {
-            // Get actual and previous squares
-            DataSquare* dataSquare = &(data[r][c]);
-            Square* square = &(board->matrix[r][c]);
-            Square* squareTop = r > 0 ? &(board->matrix[r - 1][c]) : NULL;
-            Square* squareLeft = c > 0 ? &(board->matrix[r][c - 1]) : NULL;
+// Fills each Square data in the matrix from the end to the beginning
+void fillDataDynamically(Board* board, Board* data) {
+    // Browses all squares starting on the last square
+    for (int r = board->rows - 1; r >= 0; r--) {
+        for (int c = board->columns - 1; c >= 0; c--) {
+            // Gets actual, bottom and right Squares in the matrix
+            Square* dataActual = &(data->matrix[r][c]);
+            Square* dataBottom = (r < board->rows - 1) ? &(data->matrix[r + 1][c]) : NULL;
+            Square* dataRight = (c < board->columns - 1) ? &(data->matrix[r][c + 1]) : NULL;
 
-            // Checks if is the BOARD_START
-            if (!squareTop && !squareLeft) {
-                dataSquare->origin = SQUARE_START;
-                dataSquare->actual = 1 + square->energy;
-                dataSquare->min = 1;
+            // Gets the lowest Energy between the previous Squares (bottom and right)
+            Energy previousEnergy = 1;
+            if (dataBottom && dataRight) {
+                previousEnergy = dataBottom->energy < dataRight->energy ? dataBottom->energy : dataRight->energy;
             } else {
-                // Defines bestOrigin as SQUARE_TOP or SQUARE_LEFT
-                int bestOrigin = squareTop && (!squareLeft || (data[r - 1][c].min < data[r][c - 1].min)) ? SQUARE_TOP : SQUARE_LEFT;
-                dataSquare->origin = bestOrigin;
-
-                // Sums actual Energy to the best previous Energy
-                if (bestOrigin == SQUARE_TOP) {
-                    dataSquare->actual = data[r - 1][c].actual + square->energy;
-                    dataSquare->min = data[r - 1][c].min;
-                } else {
-                    dataSquare->actual = data[r][c - 1].actual + square->energy;
-                    dataSquare->min = data[r][c - 1].min;
+                if (dataBottom) {
+                    previousEnergy = dataBottom->energy;
+                } else if (dataRight) {
+                    previousEnergy = dataRight->energy;
                 }
             }
 
-            // Adjusts min Energy if actual life is or less
-            if (dataSquare->actual <= 0) {
-                dataSquare->min -= (dataSquare->actual - 1);
-                dataSquare->actual = 1;
+            // Adds the actual energy to the previous minimum Energy
+            dataActual->energy = previousEnergy - board->matrix[r][c].energy;
+
+            // Adjusts minimum Energy to never be less than 1
+            if (dataActual->energy < 1) {
+                dataActual->energy = 1;
             }
         }
     }
 }
 
-void printPath(Board* board, DataSquare** data) {
-    int r = board->rows - 1, c = board->columns - 1;
+// Prints the path created in Dynamic Programming strategy
+void printPath(Board* data) {
+    // Row and column coordinates
+    int r = 0, c = 0;
 
-    while (1) {
-        printf("(r=%d, c=%d)\n", r + 1, c + 1);
-        if (data[r][c].origin == SQUARE_TOP)
-            r--;
-        else if (data[r][c].origin == SQUARE_LEFT)
-            c--;
-        else
-            break;
-    }
+    // Pointer to the lowest coordinate
+    int* lowest;
+
+    // Prints entire path until reach the last Square
+    do {
+        printf("(r%d, c%d)\n", r + 1, c + 1);
+
+        if (r < data->rows - 1 && c < data->columns - 1) {
+            lowest = (data->matrix[r + 1][c].energy < data->matrix[r][c + 1].energy) ? &r : &c;
+        } else {
+            if (r < data->rows - 1) {
+                lowest = &r;
+            } else if (c < data->columns - 1) {
+                lowest = &c;
+            } else {
+                lowest = NULL;
+            }
+        }
+
+        // Update coordinate 'r' or 'c'
+        if (lowest != NULL) (*lowest)++;
+    } while (lowest != NULL);
 }

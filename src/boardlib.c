@@ -37,15 +37,21 @@ void printBoard(Board* board) {
     }
 }
 
+// Deallocates entire Board structure
+void freeBoard(Board* board) {
+    for (int r = 0; r < board->rows; r++) {
+        // Deallocates Board columns
+        free(board->matrix[r]);
+    }
+    // Deallocates Board rows
+    free(board->matrix);
+}
+
 // Deallocates entire BoardsArray structure
 void freeBoardsArray(BoardsArray* array) {
     for (int b = 0; b < array->length; b++) {
-        for (int r = 0; r < array->boards[b].rows; r++) {
-            // Deallocates Board columns
-            free(array->boards[b].matrix[r]);
-        }
-        // Deallocates Board rows
-        free(array->boards[b].matrix);
+        // Deallocates entire board
+        freeBoard(&(array->boards[b]));
     }
     // Deallocates BoardsArray
     free(array->boards);

@@ -42,22 +42,24 @@ void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Ene
 
 // Searches for the minimum Energy in the board using Dynamic Programming
 Energy strategy2(Board* board) {
-    // Creates a new Board to store minimum energy of each square
+    // Creates a new temp Board to store minimum energy of each square
     Board data = createBoard(board->rows, board->columns);
 
     // Fills minimum Energy matrix and get the result from the first Square
-    fillDataDynamically(board, &data);
+    fillDynamicData(board, &data);
     Energy result = data.matrix[0][0].energy;
 
-    // printPath(&data);
+    // Displays path in console (disabled by default)
+    // printDynamicPath(&data);
 
+    // Deallocates Board data
     freeBoard(&data);
 
     return result;
 }
 
 // Fills each Square data in the matrix from the end to the beginning
-void fillDataDynamically(Board* board, Board* data) {
+void fillDynamicData(Board* board, Board* data) {
     // Browses all squares starting on the last square
     for (int r = board->rows - 1; r >= 0; r--) {
         for (int c = board->columns - 1; c >= 0; c--) {
@@ -90,7 +92,8 @@ void fillDataDynamically(Board* board, Board* data) {
 }
 
 // Prints the path created in Dynamic Programming strategy
-void printPath(Board* data) {
+// Paste the points in https://www.desmos.com/calculator input
+void printDynamicPath(Board* data) {
     // Row and column coordinates
     int r = 0, c = 0;
 
@@ -99,8 +102,12 @@ void printPath(Board* data) {
 
     // Prints entire path until reach the last Square
     do {
-        printf("(r%d, c%d)\n", r + 1, c + 1);
+        // Prints 'r' and 'c' transformed in 'x' and 'y'
+        float x = c + 0.5;
+        float y = data->rows - r - 0.5;
+        printf("(%.1f, %.1f)", x, y);
 
+        // Selects the lowest coordinate between 'r' and 'c'
         if (r < data->rows - 1 && c < data->columns - 1) {
             lowest = (data->matrix[r + 1][c].energy < data->matrix[r][c + 1].energy) ? &r : &c;
         } else {
@@ -113,7 +120,12 @@ void printPath(Board* data) {
             }
         }
 
-        // Update coordinate 'r' or 'c'
-        if (lowest != NULL) (*lowest)++;
+        // Update the selected lowest coordinate
+        if (lowest != NULL) {
+            (*lowest)++;
+            printf(", ");
+        }
+
     } while (lowest != NULL);
+    printf("\n");
 }

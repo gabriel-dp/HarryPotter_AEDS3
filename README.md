@@ -19,7 +19,7 @@ Run the makefile to generate the compilation objects and generate the final file
 make
 ```
 
-&nbsp;
+---
 
 To run the program you need to provide:
 

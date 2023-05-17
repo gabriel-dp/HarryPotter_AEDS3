@@ -5,6 +5,6 @@
 
 Energy strategyDFS(Board* board, int enablePruning);
 void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Energy* globalMin, int enablePruning);
-Energy greedyPath(Board* board);
+Energy greedySolution(Board* board);
 
 #endif

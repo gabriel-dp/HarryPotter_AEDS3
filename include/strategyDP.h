@@ -1,5 +1,5 @@
-#ifndef STRATEGY_DYNAMIC_H
-#define STRATEGY_DYNAMIC_H
+#ifndef STRATEGY_DP_H
+#define STRATEGY_DP_H
 
 #include "boardlib.h"
 

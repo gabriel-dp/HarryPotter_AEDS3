@@ -3,8 +3,8 @@
 
 #include "boardlib.h"
 
-void throwFileError(char*);
-BoardsArray getBoardsFromInput(char*);
-void saveResultsOnOutput(char*, Energy*, int);
+void throwFileError(char* message);
+BoardsArray getBoardsFromInput(char* inputPath);
+void saveResultsOnOutput(char* outputPath, Energy* results, int resultsLength);
 
 #endif

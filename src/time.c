@@ -25,7 +25,7 @@ Time formatTime(long int sec, long int usec) {
 }
 
 // Prints the difference between start to end
-void printElapsedTime(char* message, Time startTime, Time endTime) {
-    Time elapsedTime = endTime - startTime;
+void printElapsedTime(char* message, Time start, Time end) {
+    Time elapsedTime = end - start;
     printf("%s = %Lf\n", message, elapsedTime);
 }

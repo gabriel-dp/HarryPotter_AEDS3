@@ -5,7 +5,7 @@ typedef long double Time;
 
 Time getRealTime();
 Time getCpuTime();
-Time formatTime(long int, long int);
-void printElapsedTime(char*, Time, Time);
+Time formatTime(long int sec, long int usec);
+void printElapsedTime(char* message, Time start, Time end);
 
 #endif

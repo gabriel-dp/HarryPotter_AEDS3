@@ -17,10 +17,10 @@ typedef struct {
     Board* boards;
 } BoardsArray;
 
-Board createBoard(int, int);
-BoardsArray createBoardsArray(int);
-void printBoard(Board*);
-void freeBoard(Board*);
-void freeBoardsArray(BoardsArray*);
+Board createBoard(int rows, int columns);
+BoardsArray createBoardsArray(int length);
+void printBoard(Board* board);
+void freeBoard(Board* board);
+void freeBoardsArray(BoardsArray* array);
 
 #endif

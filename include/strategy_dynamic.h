@@ -3,8 +3,8 @@
 
 #include "boardlib.h"
 
-Energy strategyDynamic(Board*);
-void fillDynamicData(Board*, Board*);
-void printDynamicPath(Board*);
+Energy strategyDynamic(Board* board);
+void fillDynamicData(Board* board, Board* data);
+void printDynamicPath(Board* board);
 
 #endif

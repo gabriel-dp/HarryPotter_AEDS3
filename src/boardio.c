@@ -56,6 +56,7 @@ BoardsArray getBoardsFromInput(char* inputPath) {
     return newBoards;
 }
 
+// Saves all results in the given output file
 void saveResultsOnOutput(char* outputPath, Energy* results, int resultsLength) {
     // Try to open the outputFile in write mode
     FILE* outputFile = fopen(outputPath, "w");

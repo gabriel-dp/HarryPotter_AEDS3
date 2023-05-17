@@ -1,5 +1,6 @@
 #include "../include/args.h"
 
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,10 +18,10 @@ void getArgs(int* strategy, char** inputPath, int argc, char* argv[]) {
         throwArgsError("Correct usage: ./tp2 {strategy} {inputPath}");
     }
 
-    // Reads and validates strategy integer value
+    // Reads strategy integer value
     *strategy = atoi(argv[1]);
-    if (*strategy != 1 && *strategy != 2) {
-        throwArgsError("Strategy must be 1 for Recursive or 2 for Dynamic");
+    if (*strategy <= 0) {
+        throwArgsError("Strategy must be a positive integer number");
     }
 
     // Reads inputPath string

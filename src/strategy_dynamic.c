@@ -1,47 +1,12 @@
-#include "../include/strategy.h"
+#include "../include/strategy_dynamic.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-// Searches for the globalMin Energy in the board using Depth-First Search
-Energy strategy1(Board* board) {
-    Energy globalMin = 0;
-    depthFirstSearch(1, 1, 0, 0, board, &globalMin);
-    return globalMin;
-}
+#include "../include/boardlib.h"
 
-// Browses all paths of the matrix going only right and down, searching for the lowest globalMin
-void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Energy* globalMin) {
-    // Sum squareEnergy to actual Energy
-    Energy squareEnergy = board->matrix[r][c].energy;
-    actual += squareEnergy;
-
-    // Increase minimum Energy to prevent actual Energy from being 0 or less
-    if (actual <= 0) {
-        min -= (actual - 1);
-        actual = 1;
-    }
-
-    // Checks if reach the last Square
-    if (r == board->rows - 1 && c == board->columns - 1) {
-        // Compares globalMin Energy to actual path min Energy
-        if (*globalMin > min || *globalMin == 0) {
-            *globalMin = min;
-        }
-    } else {
-        if (r + 1 < board->rows) {
-            // Continue path in the bottom square if it exists
-            depthFirstSearch(actual, min, r + 1, c, board, globalMin);
-        }
-        if (c + 1 < board->columns) {
-            // Continue path in the right square if it exists
-            depthFirstSearch(actual, min, r, c + 1, board, globalMin);
-        }
-    }
-}
-
-// Searches for the minimum Energy in the board using Dynamic Programming
-Energy strategy2(Board* board) {
+// Solves the board using Dynamic Programming
+Energy strategyDynamic(Board* board) {
     // Creates a new temp Board to store minimum energy of each square
     Board data = createBoard(board->rows, board->columns);
 

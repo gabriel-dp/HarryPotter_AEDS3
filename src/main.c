@@ -4,7 +4,8 @@
 #include "../include/args.h"
 #include "../include/boardio.h"
 #include "../include/boardlib.h"
-#include "../include/strategy.h"
+#include "../include/strategy_dfs.h"
+#include "../include/strategy_dynamic.h"
 #include "../include/time.h"
 
 int main(int argc, char* argv[]) {
@@ -27,7 +28,18 @@ int main(int argc, char* argv[]) {
     // Runs strategy1 to find result of all boards
     for (int i = 0; i < inputBoards.length; i++) {
         // Stores the result based on selected strategy
-        results[i] = strategy == 1 ? strategy1(&inputBoards.boards[i]) : strategy2(&inputBoards.boards[i]);
+        switch (strategy) {
+            case 1:
+                results[i] = strategyDFS(&inputBoards.boards[i], 1);
+                break;
+            case 2:
+                results[i] = strategyDynamic(&inputBoards.boards[i]);
+                break;
+            default:
+                results[i] = strategyDFS(&inputBoards.boards[i], 0);
+                break;
+        }
+
         printf("Board %d (%dx%d)\n", i + 1, inputBoards.boards[i].rows, inputBoards.boards[i].columns);
         printf("Minimum Life = %d\n", results[i]);
 

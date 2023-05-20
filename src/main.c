@@ -11,8 +11,8 @@
 #include "../include/args.h"
 #include "../include/boardio.h"
 #include "../include/boardlib.h"
-#include "../include/strategy_dfs.h"
-#include "../include/strategy_dynamic.h"
+#include "../include/strategyDFS.h"
+#include "../include/strategyDP.h"
 #include "../include/time.h"
 
 int main(int argc, char* argv[]) {

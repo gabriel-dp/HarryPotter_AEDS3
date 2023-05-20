@@ -1,4 +1,4 @@
-#include "../include/strategy_dfs.h"
+#include "../include/strategyDFS.h"
 
 #include <stdio.h>
 
@@ -6,8 +6,13 @@
 
 // Solves the board using Depth-First Search
 Energy strategyDFS(Board* board, int enablePruning) {
-    Energy globalMin = enablePruning ? greedyPath(board) : 0;
+    // Initializes globalMin based on greedySolution or 0
+    Energy globalMin = enablePruning ? greedySolution(board) : 0;
+
+    // Starts search on first square
     depthFirstSearch(1, 1, 0, 0, board, &globalMin, enablePruning);
+
+    // Returns the globalMin result
     return globalMin;
 }
 
@@ -45,7 +50,7 @@ void depthFirstSearch(Energy actual, Energy min, int r, int c, Board* board, Ene
 }
 
 // Get a approximate result with a greedy algorythm
-Energy greedyPath(Board* board) {
+Energy greedySolution(Board* board) {
     // Initialize variables
     Energy min = 1, actual = 1;
     int r = 0, c = 0;

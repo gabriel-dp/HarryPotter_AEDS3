@@ -1,4 +1,4 @@
-#include "../include/strategy_dynamic.h"
+#include "../include/strategyDP.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     Time startReal = getRealTime();
     Time startCPU = getCpuTime();
 
-    // Runs strategy1 to find result of all boards
+    // Runs strategy to find result in all boards
     for (int i = 0; i < inputBoards.length; i++) {
         // Stores the result based on selected strategy
         switch (strategy) {
@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
                 break;
         }
 
+        // Prints Board data and result
         printf("Board %d (%dx%d)\n", i + 1, inputBoards.boards[i].rows, inputBoards.boards[i].columns);
         printf("Minimum Life = %d\n", results[i]);
 

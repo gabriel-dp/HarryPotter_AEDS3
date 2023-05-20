@@ -23,9 +23,17 @@ make
 
 To run the program you need to provide:
 
-- `{strategy}` (number 1 or 2)
+- `{strategy}`
 - `{inputPath}`
 
 ```bash
 ./tp2 {strategy} {inputPath}
 ```
+
+---
+
+**Strategy 1** - Brute Force with Pruning
+
+**Strategy 2** - Dynamic Programming
+
+**Strategy 3** - Brute Force

@@ -1,3 +1,10 @@
+/*============================================================
+    #define SUBJECT "Algoritmos e Estruturas de Dados III"
+    #define WORK "Trabalho Pŕatico 2 - Harry Potter"
+    #define PROFESSOR "Leo Rocha"
+    #define STUDENTS ["Davi dos Reis", "Gabriel de Paula"]
+============================================================*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
